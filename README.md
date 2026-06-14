@@ -27,6 +27,8 @@ ml/
 ├── goalscorers.csv
 ├── fifa_world_cup_prediction.ipynb  # Train the model (run once)
 ├── fifa_world_cup_inference.ipynb   # Run predictions (no retraining)
+├── train.py                         # Training script (CLI)
+├── inference.py                     # Inference script (CLI)
 ├── requirements.txt
 ├── README.md
 │
@@ -69,30 +71,38 @@ Download the dataset from Kaggle and copy the four CSV files into this folder.
 
 ### Step 1 — Train the model (once)
 
-Open and run **`fifa_world_cup_prediction.ipynb`** from top to bottom.
+**Option A — Notebook:** Open and run **`fifa_world_cup_prediction.ipynb`** from top to bottom.
 
-This notebook:
+**Option B — Script:**
 
-1. Loads and cleans all four CSV files
-2. Engineers features (Elo ratings, win rates, tournament weight, etc.)
-3. Trains a Keras neural network on matches before 2010
-4. Evaluates on World Cup matches from 2010 onward
-5. Saves the model and helper files to disk
+```bash
+python train.py
+python train.py --plot --simulate --epochs 100
+```
 
-Training takes several minutes depending on your hardware (100 epochs).
+This loads the CSVs, trains the model, evaluates on World Cup 2010+ matches, and saves artifacts to disk.
+
+Training takes several minutes depending on your hardware (100 epochs by default).
 
 ### Step 2 — Run inference (anytime)
 
-Open and run **`fifa_world_cup_inference.ipynb`**.
+**Option A — Notebook:** Open and run **`fifa_world_cup_inference.ipynb`**.
 
-This notebook loads the saved files and lets you:
+**Option B — Script:**
 
-- Predict single matches with `predict_match("Brazil", "Argentina")`
-- Predict a batch of custom matchups
-- View top teams by Elo rating
-- Simulate the 2026 World Cup 1,000 times (Monte Carlo)
+```bash
+# Example predictions (default)
+python inference.py
 
-No retraining required.
+# Single match
+python inference.py --team-a Brazil --team-b Argentina
+
+# Top teams by Elo
+python inference.py --top-elo 15
+
+# Monte Carlo World Cup simulation
+python inference.py --simulate --simulations 1000
+```
 
 ## Saved model files
 
