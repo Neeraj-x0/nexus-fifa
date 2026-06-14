@@ -31,6 +31,7 @@ ml/
 ├── inference.py                     # Inference script (CLI)
 ├── requirements.txt
 ├── README.md
+├── NOTES.md                         # Beginner concept notes (read this!)
 │
 │   # Created after training (save cell):
 ├── fifa_wc_model.keras
